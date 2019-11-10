@@ -17,5 +17,7 @@ override fun attcak(){
 fun main() {
     var Mage = Mage("the name passed in")
     Mage.attcak()
-var aaaaa= Human
+
+
+
 }
