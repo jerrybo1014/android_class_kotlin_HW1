@@ -1,0 +1,112 @@
+1. Try the statements below in REPL. Please answer that there are correct or not and
+explain the reasons.
+
+a. val id = 9527 -->correct,
+REPL執行結果:
+val id = 9527
+print("id="+id)
+//id=9527
+/*不特別指定變數屬性則會依輸入值默認，順利印出id=9527*/
+
+b. var number : Int = 5.6 -->incorrect,
+REPL執行結果:
+var number : Int = 5.6
+//error: the floating-point literal does not conform to the expected type Int
+/*宣告number時已指定其類型為Int(32位元整數),故不能設為小數;類型改使用Double即可*/
+
+修正後REPL執行結果:
+var number : Double = 5.6
+print("number="+number)
+//number=5.6
+/*順利印出number=5.6*/
+
+c. var title = "Hello Kotlin!"  -->correct
+REPL執行結果:
+var title = "Hello Kotlin!"
+print("title = "+title)
+//title = Hello Kotlin!
+/*不特別指定變數屬性則會依輸入值默認，順利印出title = Hello Kotlin!*/
+
+d. val content : String = null -->incorrect
+REPL執行結果:
+val content : String = null
+//error: null can not be a value of a non-null type String
+//val content : String = null
+/*宣告content的類型String並不可指定為null,需加上?-->String?
+
+修正後REPL執行結果:
+val content : String? = null
+print(content.isNullOrBlank())
+//true
+/*判斷content為null*/
+
+
+e. val number : Double? = 556.6 -->correct
+val number : Double? = 556.6
+print("number="+number)
+//number=556.6
+/*宣告變數屬性為Double(64位元浮點數)，順利印出number=556.6*/
+
+
+f. var list: List<String>? = listOf (null, null) -->incorrect
+REPL執行結果:
+var list: List<String>? = listOf (null, null)
+//error: type inference failed. Expected type mismatch: inferred type is List<Nothing?> but List<String>? was expected
+//var list: List<String>? = listOf (null, null)
+/*因宣告類型為List?,可以使list=null,但不能使集合內string為null,加上string?即可*/
+
+修正後REPL執行結果:
+var list: List<String?>? = listOf (null, null)
+print(list)
+//[null, null]
+
+g. var list: List<String?>? = listOf ("Wayne", "Chen") -->correct
+REPL執行結果:
+var list: List<String?>? = listOf ("Wayne", "Chen")
+print(list)
+//[Wayne, Chen]
+/*list被宣告為本身或集合內string可為null,此式刪去問號也可正常運行*/
+
+
+h. list.size -->incorrect
+REPL執行結果:
+list.size
+//error: only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type List<String?>?
+//list.size
+/*因上一題宣告類型為List<String?>?,訪問其屬性時也需使用list?*/
+
+i. list?.size -->correct
+REPL執行結果:
+list?.size
+//res71: kotlin.Int? = 2
+/*使用list?可順利執行*/
+
+
+
+2. Read the code below, choose the correct answer and explain the reason.
+
+執行結果為 : Your grace.
+
+因已宣告message = "Hello and welcome to AppWorks School :)"
+其字串長度為39,
+
+when (運算式，用來判斷的資料) {
+    值[,值...] -> 判斷的資料等於前面的值，執行這裡的程式碼
+    [...]
+    [else -> 判斷的資料不等於前面指定的值，執行這裡的程式碼]
+}
+
+經過when函數符合條件為 in 1 .. 39 -> println ( "Your grace." )
+
+
+3. Read the code below, choose the correct answer and explain the reason.
+
+answer : d. val array = Array(6) { 1000.0.pow( it ) }
+
+如需使用array的元素編號與元素值，可使用for (<index, value> in <array>.withIndex()) { ...}
+
+觀察題目output結果，value.toLong()可使其元素值轉換為整數
+for迴圈使用array的元素值為{1,1000.0,1000000.0,......}
+-->宣告一個array其有6個成員,其元素值為1000.0^(元素編號)
+val array = Array(6) { 1000.0.pow( it ) }符合結果
+
